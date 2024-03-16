@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPEAKING MAP!</title>
+    <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .container {
-            margin-top: 50px;
+            margin-top: 20px;
         }
 
         .data-container {
@@ -24,43 +25,35 @@
             padding: 20px;
             border-radius: 5px;
             color: white;
-            /* データ1～5の文字色を白に設定 */
         }
 
         .normal {
             background-color: #03a9f4;
-            /* データ2のデフォルト背景色 */
         }
 
         .current {
             background-color: #3f51b5;
-            /* 今の背景色 */
         }
 
         .past {
             background-color: #f44336;
-            /* 過去の背景色 */
         }
 
         .future {
             background-color: #2e7d32;
-            /* 未来の背景色 */
         }
 
         .data-item[data-id="data1"] {
             background-color: #00bcd4;
-            /* データ1の背景色 */
         }
 
         .data-item[data-id="data3"],
         .data-item[data-id="data4"] {
             background-color: #a1887f;
-            /* データ3と4の背景色を#616161に設定 */
         }
 
         .data-item[data-id="data5"] {
             background-color: #795548;
-            /* データ5の背景色 */
         }
 
         @media(max-width: 768px) {
@@ -68,168 +61,259 @@
                 width: 100%;
             }
         }
-
     </style>
 </head>
 
 <body>
     <div class="container">
         <h1>SPEAKING MAP!</h1>
-        <button id="randomButton" class="btn btn-primary">Click here!</button>
-        <div class="data-container mt-3">
-            <div id="data1" class="data-item" data-id="data1"></div>
-            <div id="data2" class="data-item"></div>
-            <div id="data3" class="data-item" data-id="data3"></div>
-            <div id="data4" class="data-item" data-id="data4"></div>
-            <div id="data5" class="data-item" data-id="data5"></div>
+        <!-- Tab navigation -->
+        <ul class="nav nav-tabs" id="myTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="tab1" data-toggle="tab" href="#content1" role="tab"
+                    aria-controls="content1" aria-selected="true">Default</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab2" data-toggle="tab" href="#content2" role="tab" aria-controls="content2"
+                    aria-selected="false">主語がItの動詞</a>
+            </li>
+        </ul>
+        <!-- Tab content -->
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="content1" role="tabpanel" aria-labelledby="tab1">
+                <button id="randomButton1" class="btn btn-primary mt-2">Click here!</button>
+                <div class="data-container mt-3">
+                    <div id="data1-tab1" class="data-item" data-id="data1"></div>
+                    <div id="data2-tab1" class="data-item"></div>
+                    <div id="data3-tab1" class="data-item" data-id="data3"></div>
+                    <div id="data4-tab1" class="data-item" data-id="data4"></div>
+                    <div id="data5-tab1" class="data-item" data-id="data5"></div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="content2" role="tabpanel" aria-labelledby="tab2">
+                <button id="randomButton2" class="btn btn-primary mt-2">Click here for the subject is It!</button>
+                <div class="data-container mt-3">
+                    <div id="data1-tab2" class="data-item" data-id="data1"></div>
+                    <div id="data2-tab2" class="data-item"></div>
+                    <div id="data3-tab2" class="data-item" data-id="data3"></div>
+                    <div id="data4-tab2" class="data-item" data-id="data4"></div>
+                    <div id="data5-tab2" class="data-item" data-id="data5"></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        const data = {
-                data1: [
-                    "データ1-1",
-                    "データ1-2",
-                    "データ1-3",
-                    "データ1-4",
-                    "データ1-5"
-                ],
-                data2: [
-                    "普段",
-                    "今",
-                    "過去",
-                    "未来"
-                ],
-                data3: [
-                    "I",
-                    "You",
-                    "We",
-                    "They",
-                    "He",
-                    "She",
-                    "It",
-                    "You",
-                    "We",
-                    "They",
-                    "He",
-                    "She",
-                    "It"
-                ],
-                data4: [
-                    "肯定",
-                    "否定",
-                    "疑問"
-                ],
-                data5: [
-                    "go",
-                    "come",
-                    "leave",
-                    "work",
-                    "study",
-                    "know",
-                    "pay",
-                    "change",
-                    "understand",
-                    "explain",
-                    "win",
-                    "lose",
-                    "eat",
-                    "drink",
-                    "smoke",
-                    "try",
-                    "learn",
-                    "ask",
-                    "walk",
-                    "drive",
-                    "cook",
-                    "talk",
-                    "speak",
-                    "read",
-                    "stay",
-                    "start",
-                    "finish",
-                    "stop",
-                    "help",
-                    "move",
-                    "get it",
-                    "do it",
-                    "have it",
-                    "take it",
-                    "bring it",
-                    "use it",
-                    "teach it",
-                    "find it",
-                    "like it",
-                    "watch it",
-                    "see it",
-                    "look at it",
-                    "listen to it",
-                    "look for it",
-                    "buy it",
-                    "sell it",
-                    "send it",
-                    "make it",
-                    "write it",
-                    "say it",
-                    "wear it",
-                    "break it",
-                    "tell 人",
-                    "show 人",
-                    "take 人",
-                    "invite 人",
-                    "email 人",
-                    "text 人",
-                    "call (人)",
-                    "meet (人)",
-                    "give (人) it",
-                    "rain",
-                    "snow",
-                    "sell",
-                    "start",
-                    "finish",
-                    "stop",
-                    "happen",
-                    "break",
-                    "take <i>time</i>",
-                    "backfire",
-                    "pay off"
-                ]
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script> // JavaScript code for tab 1
+        const dataTab1 = {
+            data1: [
+                "Data 1-1 Tab 1",
+                "Data 1-2 Tab 1",
+                "Data 1-3 Tab 1",
+                "Data 1-4 Tab 1",
+                "Data 1-5 Tab 1"
+            ],
+            data2: [
+                "普段",
+                "今",
+                "過去",
+                "未来"
+            ],
+            data3: [
+                "I",
+                "You",
+                "We",
+                "They",
+                "He",
+                "She",
+                "You",
+                "We",
+                "They",
+                "He",
+                "She"
+            ],
+            data4: [
+                "肯定",
+                "否定",
+                "疑問"
+            ],
+            data5: [
+                "go",
+                "come",
+                "leave",
+                "work",
+                "study",
+                "know",
+                "pay",
+                "change",
+                "understand",
+                "explain",
+                "win",
+                "lose",
+                "eat",
+                "drink",
+                "smoke",
+                "try",
+                "learn",
+                "ask",
+                "walk",
+                "drive",
+                "cook",
+                "talk",
+                "speak",
+                "read",
+                "stay",
+                "start",
+                "finish",
+                "stop",
+                "help",
+                "move",
+                "get it　(目的語が必ず要る動詞)",
+                "do it　(目的語が必ず要る動詞)",
+                "have it　(目的語が必ず要る動詞)",
+                "take it　(目的語が必ず要る動詞)",
+                "bring it　(目的語が必ず要る動詞)",
+                "use it　(目的語が必ず要る動詞)",
+                "teach it　(目的語が必ず要る動詞)",
+                "find it　(目的語が必ず要る動詞)",
+                "like it　(目的語が必ず要る動詞)",
+                "watch it　(目的語が必ず要る動詞)",
+                "see it　(目的語が必ず要る動詞)",
+                "look at it　(目的語が必ず要る動詞)",
+                "listen to it　(目的語が必ず要る動詞)",
+                "look for it　(目的語が必ず要る動詞)",
+                "buy it　(目的語が必ず要る動詞)",
+                "sell it　(目的語が必ず要る動詞)",
+                "send it　(目的語が必ず要る動詞)",
+                "make it　(目的語が必ず要る動詞)",
+                "write it　(目的語が必ず要る動詞)",
+                "say it　(目的語が必ず要る動詞)",
+                "wear it　(目的語が必ず要る動詞)",
+                "break it　(目的語が必ず要る動詞)",
+                "tell 人　(人が目的語の動詞)",
+                "show 人　(人が目的語の動詞)",
+                "take 人　(人が目的語の動詞)",
+                "invite 人　(人が目的語の動詞)",
+                "email 人　(人が目的語の動詞)",
+                "text 人　(人が目的語の動詞)",
+                "call (人)　(人が目的語の動詞)",
+                "meet (人)　(人が目的語の動詞)",
+                "give (人) i　(人が目的語の動詞)t"
+            ]
         };
 
-        const randomButton = document.getElementById('randomButton');
-        const dataDivs = {
-            data1: document.getElementById('data1'),
-            data2: document.getElementById('data2'),
-            data3: document.getElementById('data3'),
-            data4: document.getElementById('data4'),
-            data5: document.getElementById('data5')
+        // JavaScript code for tab 2
+        const dataTab2 = {
+            data1: [
+                "Data 1-1 Tab 1",
+                "Data 1-2 Tab 1",
+                "Data 1-3 Tab 1",
+                "Data 1-4 Tab 1",
+                "Data 1-5 Tab 1"
+            ],
+            data2: [
+                "普段",
+                "今",
+                "過去",
+                "未来"
+            ],
+            data3: [
+                "It"
+            ],
+            data4: [
+                "肯定",
+                "否定",
+                "疑問"
+            ],
+            data5: [
+                "rain",
+                "snow",
+                "sell",
+                "start",
+                "finish",
+                "stop",
+                "happen",
+                "break",
+                "take time",
+                "backfire",
+                "pay off"
+            ]
         };
 
-        randomButton.addEventListener('click', () => {
-            for (let key in dataDivs) {
-                const randomIndex = Math.floor(Math.random() * data[key].length);
-                dataDivs[key].textContent = data[key][randomIndex];
-                dataDivs[key].classList.remove('normal', 'current', 'past', 'future');
-                switch (data[key][randomIndex]) {
+        const randomButton1 = document.getElementById('randomButton1');
+        const dataDivsTab1 = {
+            data1: document.getElementById('data1-tab1'),
+            data2: document.getElementById('data2-tab1'),
+            data3: document.getElementById('data3-tab1'),
+            data4: document.getElementById('data4-tab1'),
+            data5: document.getElementById('data5-tab1')
+        };
+
+        randomButton1.addEventListener('click', () => {
+            for (let key in dataDivsTab1) {
+                const randomIndex = Math.floor(Math.random() * dataTab1[key].length);
+                dataDivsTab1[key].textContent = dataTab1[key][randomIndex];
+                dataDivsTab1[key].classList.remove('normal', 'current', 'past', 'future');
+                switch (dataTab1[key][randomIndex]) {
                     case '普段':
-                        dataDivs[key].classList.add('normal');
+                        dataDivsTab1[key].classList.add('normal');
                         break;
                     case '今':
-                        dataDivs[key].classList.add('current');
+                        dataDivsTab1[key].classList.add('current');
                         break;
                     case '過去':
-                        dataDivs[key].classList.add('past');
+                        dataDivsTab1[key].classList.add('past');
                         break;
                     case '未来':
-                        dataDivs[key].classList.add('future');
+                        dataDivsTab1[key].classList.add('future');
                         break;
                     default:
-                        dataDivs[key].classList.add('normal');
+                        dataDivsTab1[key].classList.add('normal');
                         break;
                 }
             }
         });
+
+
+            const randomButton2 = document.getElementById('randomButton2');
+            const dataDivsTab2 = {
+                data1: document.getElementById('data1-tab2'),
+                data2: document.getElementById('data2-tab2'),
+                data3: document.getElementById('data3-tab2'),
+                data4: document.getElementById('data4-tab2'),
+                data5: document.getElementById('data5-tab2')
+            };
+
+            randomButton2.addEventListener('click', () => {
+                for (let key in dataDivsTab2) {
+                    const randomIndex = Math.floor(Math.random() * dataTab2[key].length);
+                    dataDivsTab2[key].textContent = dataTab2[key][randomIndex];
+                    dataDivsTab2[key].classList.remove('normal', 'current', 'past', 'future');
+                    switch (dataTab2[key][randomIndex]) {
+                        case '普段':
+                            dataDivsTab2[key].classList.add('normal');
+                            break;
+                        case '今':
+                            dataDivsTab2[key].classList.add('current');
+                            break;
+                        case '過去':
+                            dataDivsTab2[key].classList.add('past');
+                            break;
+                        case '未来':
+                            dataDivsTab2[key].classList.add('future');
+                            break;
+                        default:
+                            dataDivsTab2[key].classList.add('normal');
+                            break;
+                    }
+                }
+            });
     </script>
 </body>
 
 </html>
+
